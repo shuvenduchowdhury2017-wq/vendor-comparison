@@ -1,0 +1,140 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Project {
+  id        String   @id @default(cuid())
+  name      String
+  location  String   @default("")
+  createdAt DateTime @default(now())
+  tenders   Tender[]
+}
+
+model WorkType {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  tenders   Tender[]
+}
+
+model TenderAttachment {
+  id        String   @id @default(cuid())
+  tenderId  String
+  tender    Tender   @relation(fields: [tenderId], references: [id], onDelete: Cascade)
+  fileName  String
+  fileSize  Int      @default(0)
+  mimeType  String   @default("")
+  filePath  String
+  createdAt DateTime @default(now())
+}
+
+model QuotationAttachment {
+  id          String    @id @default(cuid())
+  quotationId String
+  quotation   Quotation @relation(fields: [quotationId], references: [id], onDelete: Cascade)
+  fileName    String
+  fileSize    Int       @default(0)
+  mimeType    String    @default("")
+  filePath    String
+  createdAt   DateTime  @default(now())
+}
+
+model Tender {
+  id          String    @id @default(cuid())
+  projectName String
+  workName    String
+  status      String    @default("DRAFT")
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  retentionPercent     Float   @default(0)
+  tdsApplicable        Boolean @default(false)
+  labourCessApplicable Boolean @default(false)
+  otherTerms           String  @default("")
+  projectId   String?
+  project     Project?  @relation(fields: [projectId], references: [id])
+  workTypeId  String?
+  workType    WorkType? @relation(fields: [workTypeId], references: [id])
+  items       TenderItem[]
+  invites     VendorInvite[]
+  attachments TenderAttachment[]
+}
+
+model TenderItem {
+  id          String   @id @default(cuid())
+  tenderId    String
+  tender      Tender   @relation(fields: [tenderId], references: [id], onDelete: Cascade)
+  slNo        Int
+  itemName    String
+  description String   @default("")
+  uom         String
+  quantity    Float
+  remarks     String   @default("")
+  quotationItems QuotationItem[]
+}
+
+model Vendor {
+  id       String   @id @default(cuid())
+  name     String
+  email    String   @unique
+  category String   @default("")
+  createdAt DateTime @default(now())
+  invites  VendorInvite[]
+}
+
+model VendorInvite {
+  id        String   @id @default(cuid())
+  tenderId  String
+  tender    Tender   @relation(fields: [tenderId], references: [id], onDelete: Cascade)
+  vendorId  String
+  vendor    Vendor   @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  token     String   @unique @default(cuid())
+  status    String   @default("PENDING")
+  createdAt DateTime @default(now())
+  quotation Quotation?
+  draft     QuotationDraft?
+}
+
+model QuotationDraft {
+  id        String       @id @default(cuid())
+  inviteId  String       @unique
+  invite    VendorInvite @relation(fields: [inviteId], references: [id], onDelete: Cascade)
+  ratesJson String
+  savedAt   DateTime     @updatedAt
+}
+
+model Quotation {
+  id          String   @id @default(cuid())
+  inviteId    String   @unique
+  invite      VendorInvite @relation(fields: [inviteId], references: [id], onDelete: Cascade)
+  submittedAt DateTime @default(now())
+  revision    Int      @default(0)
+  items       QuotationItem[]
+  attachments QuotationAttachment[]
+}
+
+model BoqReference {
+  id          Int    @id @default(autoincrement())
+  itemName    String
+  description String @default("")
+  uom         String @default("")
+  category    String @default("")
+  searchText  String @default("")
+
+  @@index([itemName])
+}
+
+model QuotationItem {
+  id           String   @id @default(cuid())
+  quotationId  String
+  quotation    Quotation  @relation(fields: [quotationId], references: [id], onDelete: Cascade)
+  tenderItemId String
+  tenderItem   TenderItem @relation(fields: [tenderItemId], references: [id], onDelete: Cascade)
+  unitRate     Float
+  amount       Float
+  remarks      String   @default("")
+}

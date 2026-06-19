@@ -1,0 +1,330 @@
+[browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+⨯ Error [PrismaClientValidationError]: 
+Invalid `{imported module ./lib/db.ts}["prisma"].vendorInvite.findUnique()` invocation in
+C:\Users\Shuvendu\vendor-comparison\.next\dev\server\chunks\ssr\[root-of-the-server]__005zmid._.js:553:155
+
+  550 const { token } = await props.params;
+  551 const sp = await props.searchParams;
+  552 const reviseRequested = sp?.revise === '1';
+→ 553 const invite = await {imported module ./lib/db.ts}["prisma"].vendorInvite.findUnique({
+        where: {
+          token: "nonexistent"
+        },
+        include: {
+          vendor: true,
+          tender: {
+            include: {
+              items: {
+                orderBy: {
+                  slNo: "asc"
+                }
+              },
+              attachments: {
+                orderBy: {
+                  createdAt: "asc"
+                }
+              }
+            }
+          },
+          quotation: {
+            include: {
+              items: true,
+              attachments: true
+            }
+          },
+          draft: true
+          ~~~~~
+        }
+      })
+
+Unknown field `draft` for include statement on model `VendorInvite`. Available options are marked with ?.
+    at <unknown> (app\quote\[token]\page.tsx:27:44)
+    at async VendorQuotePage (app\quote\[token]\page.tsx:27:18)
+  25 |   const reviseRequested = sp?.revise === '1'
+  26 |
+> 27 |   const invite = await prisma.vendorInvite.findUnique({
+     |                                            ^
+  28 |     where: { token },
+  29 |     include: {
+  30 |       vendor: true, {
+  clientVersion: '7.8.0',
+  digest: '1168379836'
+}
+⨯ Error [PrismaClientValidationError]: 
+Invalid `{imported module ./lib/db.ts}["prisma"].vendorInvite.findUnique()` invocation in
+C:\Users\Shuvendu\vendor-comparison\.next\dev\server\chunks\ssr\[root-of-the-server]__1f2t87k._.js:456:155
+
+  453 ;
+  454 async function DraftPrintPage(props) {
+  455     const { token } = await props.params;
+→ 456     const invite = await {imported module ./lib/db.ts}["prisma"].vendorInvite.findUnique({
+            where: {
+              token: "nonexistent"
+            },
+            include: {
+              vendor: true,
+              tender: {
+                include: {
+                  items: {
+                    orderBy: {
+                      slNo: "asc"
+                    }
+                  }
+                }
+              },
+              draft: true,
+              ~~~~~
+          ?   quotation?: true
+            }
+          })
+
+Unknown field `draft` for include statement on model `VendorInvite`. Available options are marked with ?.
+    at <unknown> (app\quote\[token]\draft\page.tsx:10:44)
+    at async DraftPrintPage (app\quote\[token]\draft\page.tsx:10:18)
+   8 |   const { token } = await props.params
+   9 |
+> 10 |   const invite = await prisma.vendorInvite.findUnique({
+     |                                            ^
+  11 |     where: { token },
+  12 |     include: {
+  13 |       vendor: true, {
+  clientVersion: '7.8.0',
+  digest: '1765940233'
+}
+⨯ Error [PrismaClientValidationError]: 
+Invalid `{imported module ./lib/db.ts}["prisma"].vendorInvite.findUnique()` invocation in
+C:\Users\Shuvendu\vendor-comparison\.next\dev\server\chunks\[root-of-the-server]__1lv49jz._.js:441:157
+
+  438 ;
+  439 async function GET(_req, ctx) {
+  440     const { token } = await ctx.params;
+→ 441     const invite = await {imported module ./lib/db.ts}["prisma"].vendorInvite.findUnique({
+            where: {
+              token: "nonexistent"
+            },
+            include: {
+              draft: true,
+              ~~~~~
+              tender: {
+                select: {
+                  status: true
+                }
+              },
+          ?   vendor?: true,
+          ?   quotation?: true
+            }
+          })
+
+Unknown field `draft` for include statement on model `VendorInvite`. Available options are marked with ?.
+    at <unknown> (app\api\quote\[token]\draft\route.ts:6:44)
+    at async GET (app\api\quote\[token]\draft\route.ts:6:18)
+  4 | export async function GET(_req: NextRequest, ctx: RouteContext<'/api/quote/[token]/draft'>) {
+  5 |   const { token } = await ctx.params
+> 6 |   const invite = await prisma.vendorInvite.findUnique({
+    |                                            ^
+  7 |     where: { token },
+  8 |     include: { draft: true, tender: { select: { status: true } } },
+  9 |   }) {
+  clientVersion: '7.8.0'
+}
+⨯ Error [PrismaClientValidationError]: 
+Invalid `{imported module ./lib/db.ts}["prisma"].vendorInvite.findUnique()` invocation in
+C:\Users\Shuvendu\vendor-comparison\.next\dev\server\chunks\ssr\[root-of-the-server]__1f2t87k._.js:456:155
+
+  453 ;
+  454 async function DraftPrintPage(props) {
+  455     const { token } = await props.params;
+→ 456     const invite = await {imported module ./lib/db.ts}["prisma"].vendorInvite.findUnique({
+            where: {
+              token: "nonexistent"
+            },
+            include: {
+              vendor: true,
+              tender: {
+                include: {
+                  items: {
+                    orderBy: {
+                      slNo: "asc"
+                    }
+                  }
+                }
+              },
+              draft: true,
+              ~~~~~
+          ?   quotation?: true
+            }
+          })
+
+Unknown field `draft` for include statement on model `VendorInvite`. Available options are marked with ?.
+    at <unknown> (app\quote\[token]\draft\page.tsx:10:44)
+    at async DraftPrintPage (app\quote\[token]\draft\page.tsx:10:18)
+   8 |   const { token } = await props.params
+   9 |
+> 10 |   const invite = await prisma.vendorInvite.findUnique({
+     |                                            ^
+  11 |     where: { token },
+  12 |     include: {
+  13 |       vendor: true, {
+  clientVersion: '7.8.0',
+  digest: '1765940233'
+}
+⨯ Error [PrismaClientValidationError]: 
+Invalid `{imported module ./lib/db.ts}["prisma"].vendorInvite.findUnique()` invocation in
+C:\Users\Shuvendu\vendor-comparison\.next\dev\server\chunks\[root-of-the-server]__1lv49jz._.js:441:157
+
+  438 ;
+  439 async function GET(_req, ctx) {
+  440     const { token } = await ctx.params;
+→ 441     const invite = await {imported module ./lib/db.ts}["prisma"].vendorInvite.findUnique({
+            where: {
+              token: "nonexistent"
+            },
+            include: {
+              draft: true,
+              ~~~~~
+              tender: {
+                select: {
+                  status: true
+                }
+              },
+          ?   vendor?: true,
+          ?   quotation?: true
+            }
+          })
+
+Unknown field `draft` for include statement on model `VendorInvite`. Available options are marked with ?.
+    at <unknown> (app\api\quote\[token]\draft\route.ts:6:44)
+    at async GET (app\api\quote\[token]\draft\route.ts:6:18)
+  4 | export async function GET(_req: NextRequest, ctx: RouteContext<'/api/quote/[token]/draft'>) {
+  5 |   const { token } = await ctx.params
+> 6 |   const invite = await prisma.vendorInvite.findUnique({
+    |                                            ^
+  7 |     where: { token },
+  8 |     include: { draft: true, tender: { select: { status: true } } },
+  9 |   }) {
+  clientVersion: '7.8.0'
+}
+⨯ Error [PrismaClientValidationError]: 
+Invalid `{imported module ./lib/db.ts}["prisma"].vendorInvite.findUnique()` invocation in
+C:\Users\Shuvendu\vendor-comparison\.next\dev\server\chunks\[root-of-the-server]__1lv49jz._.js:441:157
+
+  438 ;
+  439 async function GET(_req, ctx) {
+  440     const { token } = await ctx.params;
+→ 441     const invite = await {imported module ./lib/db.ts}["prisma"].vendorInvite.findUnique({
+            where: {
+              token: "testtoken"
+            },
+            include: {
+              draft: true,
+              ~~~~~
+              tender: {
+                select: {
+                  status: true
+                }
+              },
+          ?   vendor?: true,
+          ?   quotation?: true
+            }
+          })
+
+Unknown field `draft` for include statement on model `VendorInvite`. Available options are marked with ?.
+    at <unknown> (app\api\quote\[token]\draft\route.ts:6:44)
+    at async GET (app\api\quote\[token]\draft\route.ts:6:18)
+  4 | export async function GET(_req: NextRequest, ctx: RouteContext<'/api/quote/[token]/draft'>) {
+  5 |   const { token } = await ctx.params
+> 6 |   const invite = await prisma.vendorInvite.findUnique({
+    |                                            ^
+  7 |     where: { token },
+  8 |     include: { draft: true, tender: { select: { status: true } } },
+  9 |   }) {
+  clientVersion: '7.8.0'
+}
+⨯ Error [PrismaClientValidationError]: 
+Invalid `{imported module ./lib/db.ts}["prisma"].vendorInvite.findUnique()` invocation in
+C:\Users\Shuvendu\vendor-comparison\.next\dev\server\chunks\[root-of-the-server]__1lv49jz._.js:441:157
+
+  438 ;
+  439 async function GET(_req, ctx) {
+  440     const { token } = await ctx.params;
+→ 441     const invite = await {imported module ./lib/db.ts}["prisma"].vendorInvite.findUnique({
+            where: {
+              token: "testtoken"
+            },
+            include: {
+              draft: true,
+              ~~~~~
+              tender: {
+                select: {
+                  status: true
+                }
+              },
+          ?   vendor?: true,
+          ?   quotation?: true
+            }
+          })
+
+Unknown field `draft` for include statement on model `VendorInvite`. Available options are marked with ?.
+    at <unknown> (app\api\quote\[token]\draft\route.ts:6:44)
+    at async GET (app\api\quote\[token]\draft\route.ts:6:18)
+  4 | export async function GET(_req: NextRequest, ctx: RouteContext<'/api/quote/[token]/draft'>) {
+  5 |   const { token } = await ctx.params
+> 6 |   const invite = await prisma.vendorInvite.findUnique({
+    |                                            ^
+  7 |     where: { token },
+  8 |     include: { draft: true, tender: { select: { status: true } } },
+  9 |   }) {
+  clientVersion: '7.8.0'
+}
+⨯ Error [PrismaClientValidationError]: 
+Invalid `{imported module ./lib/db.ts}["prisma"].vendorInvite.findUnique()` invocation in
+C:\Users\Shuvendu\vendor-comparison\.next\dev\server\chunks\ssr\[root-of-the-server]__005zmid._.js:553:155
+
+  550 const { token } = await props.params;
+  551 const sp = await props.searchParams;
+  552 const reviseRequested = sp?.revise === '1';
+→ 553 const invite = await {imported module ./lib/db.ts}["prisma"].vendorInvite.findUnique({
+        where: {
+          token: "testtoken"
+        },
+        include: {
+          vendor: true,
+          tender: {
+            include: {
+              items: {
+                orderBy: {
+                  slNo: "asc"
+                }
+              },
+              attachments: {
+                orderBy: {
+                  createdAt: "asc"
+                }
+              }
+            }
+          },
+          quotation: {
+            include: {
+              items: true,
+              attachments: true
+            }
+          },
+          draft: true
+          ~~~~~
+        }
+      })
+
+Unknown field `draft` for include statement on model `VendorInvite`. Available options are marked with ?.
+    at <unknown> (app\quote\[token]\page.tsx:27:44)
+    at async VendorQuotePage (app\quote\[token]\page.tsx:27:18)
+  25 |   const reviseRequested = sp?.revise === '1'
+  26 |
+> 27 |   const invite = await prisma.vendorInvite.findUnique({
+     |                                            ^
+  28 |     where: { token },
+  29 |     include: {
+  30 |       vendor: true, {
+  clientVersion: '7.8.0',
+  digest: '348991228'
+}

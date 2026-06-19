@@ -1,0 +1,315 @@
+@import "tailwindcss";
+
+/* ─── Tailwind v4: custom color tokens — dark theme (T&C Generator palette) ─── */
+@theme {
+  --color-accent:    #c05327;
+  --color-accent-2:  #d4622e;
+  --color-accent-dk: #a04420;
+  --color-paper:     #1d1c1b;
+  --color-paper-2:   #1b1a19;
+  --color-card:      #242423;
+  --color-ink:       #e9e4db;
+  --color-ink-soft:  rgba(233,228,219,.55);
+  --color-line:      rgba(255,255,255,.10);
+  --color-line-soft: rgba(255,255,255,.06);
+  --color-gold:      #c4a050;
+  --color-pgreen:    #4a8050;
+}
+
+:root {
+  --accent:      #c05327;
+  --accent-2:    #d4622e;
+  --accent-dk:   #a04420;
+  --paper:       #1d1c1b;
+  --paper-2:     #1b1a19;
+  --card:        #242423;
+  --warm:        #242423;
+  --ink:         #e9e4db;
+  --ink-soft:    rgba(233,228,219,.60);
+  --muted:       rgba(233,228,219,.55);
+  --line:        rgba(255,255,255,.10);
+  --line-soft:   rgba(255,255,255,.06);
+  --ivory:       #f8f3e9;
+  --gold:        #c4a050;
+  --pgreen:      #4a8050;
+  --shadow:      0 1px 3px rgba(0,0,0,.45), 0 8px 30px rgba(0,0,0,.40);
+  --shadow-md:   0 4px 16px rgba(0,0,0,.50), 0 1px 3px rgba(0,0,0,.40);
+  --shadow-lg:   0 30px 80px rgba(0,0,0,.65), 0 8px 24px rgba(0,0,0,.50);
+  --shell-bg:
+    radial-gradient(900px 500px at 80% -5%,   rgba(192,83,39,.22), transparent 55%),
+    radial-gradient(600px 400px at -5%  90%,  rgba(192,83,39,.08), transparent 50%),
+    linear-gradient(180deg, #1d1c1b 0%, #282828 55%, #161616 100%);
+  --nav-bg:    linear-gradient(180deg, #2c2c2a, #242423);
+  --nav-cream: #e9e4db;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-poppins, system-ui), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100dvh;
+  line-height: 1.55;
+}
+
+/* subtle grain texture on dark background */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: .18;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+  mix-blend-mode: soft-light;
+}
+
+/* content must sit above grain */
+body > * { position: relative; z-index: 1; }
+
+/* ─── Login shell ─── */
+.pma-shell {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--shell-bg);
+  padding: 1.5rem;
+}
+
+.pma-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 2.75rem 2.25rem;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: var(--shadow-lg);
+}
+
+/* ─── Form controls ─── */
+.pma-input {
+  width: 100%;
+  border: 1.5px solid rgba(192,83,39,.25);
+  border-radius: 10px;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.875rem;
+  background: #f8f3e9;
+  color: #2c2a26;
+  outline: none;
+  transition: border-color .15s, box-shadow .15s;
+  font-family: inherit;
+}
+.pma-input::placeholder { color: #a09580; opacity: 1; }
+.pma-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(192,83,39,.18);
+}
+
+.pma-select {
+  width: 100%;
+  border: 1.5px solid rgba(192,83,39,.25);
+  border-radius: 10px;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.875rem;
+  background: #f8f3e9;
+  color: #2c2a26;
+  outline: none;
+  transition: border-color .15s, box-shadow .15s;
+  font-family: inherit;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%23a09580' stroke-width='2'%3E%3Cpath d='M3 5l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.875rem center;
+  background-color: #f8f3e9;
+  padding-right: 2.25rem;
+}
+.pma-select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(192,83,39,.18);
+}
+
+/* ─── Buttons ─── */
+.pma-btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.65rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s, box-shadow .15s, transform .1s;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 6px 18px rgba(192,83,39,.28);
+}
+.pma-btn:hover:not(:disabled) {
+  background: var(--accent-dk);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(192,83,39,.38);
+}
+.pma-btn:active:not(:disabled) { transform: translateY(0); }
+.pma-btn:disabled { opacity: .55; cursor: default; }
+.pma-btn-full { width: 100%; justify-content: center; }
+
+.pma-btn-accent {
+  background: var(--accent);
+  box-shadow: 0 6px 18px rgba(192,83,39,.28);
+}
+.pma-btn-accent:hover:not(:disabled) { background: var(--accent-dk); }
+
+/* ─── Dark-theme overrides for Tailwind utilities (screen only) ─── */
+/* Scoped to @media screen so print output keeps white backgrounds */
+@media screen {
+  /* Page & card backgrounds */
+  .bg-white      { background-color: var(--card)    !important; }
+  .bg-gray-50    { background-color: var(--paper-2) !important; }
+  .bg-gray-100   { background-color: rgba(255,255,255,.06) !important; }
+  .bg-gray-800   { background-color: rgba(255,255,255,.10) !important; }
+  .bg-gray-900   { background-color: rgba(255,255,255,.12) !important; }
+
+  /* Status / tinted backgrounds */
+  .bg-green-50   { background-color: rgba(42,160,72,.10)  !important; }
+  .bg-green-100  { background-color: rgba(42,160,72,.15)  !important; }
+  .bg-orange-50  { background-color: rgba(192,83,39,.10)  !important; }
+  .bg-orange-100 { background-color: rgba(192,83,39,.15)  !important; }
+  .bg-amber-50   { background-color: rgba(190,140,30,.10) !important; }
+  .bg-red-50     { background-color: rgba(200,50,50,.10)  !important; }
+  .bg-blue-50    { background-color: rgba(50,100,220,.10) !important; }
+
+  /* Text */
+  .text-gray-900 { color: var(--ink)                    !important; }
+  .text-gray-800 { color: var(--ink)                    !important; }
+  .text-gray-700 { color: rgba(233,228,219,.80)         !important; }
+  .text-gray-600 { color: rgba(233,228,219,.65)         !important; }
+  .text-gray-500 { color: rgba(233,228,219,.55)         !important; }
+  .text-gray-400 { color: rgba(233,228,219,.40)         !important; }
+  .text-gray-300 { color: rgba(233,228,219,.30)         !important; }
+
+  .text-green-600  { color: #5cc875 !important; }
+  .text-green-700  { color: #5cc875 !important; }
+  .text-green-800  { color: #4aae65 !important; }
+  .text-orange-600 { color: #d4622e !important; }
+  .text-orange-700 { color: #c05327 !important; }
+  .text-orange-800 { color: #a04420 !important; }
+  .text-orange-900 { color: #8c3a18 !important; }
+  .text-amber-800  { color: #d4aa40 !important; }
+  .text-red-600    { color: #e05050 !important; }
+  .text-blue-800   { color: #6090e0 !important; }
+
+  /* Borders */
+  .border           { border-color: var(--line)                !important; }
+  .border-gray-50   { border-color: var(--line-soft)           !important; }
+  .border-gray-100  { border-color: var(--line-soft)           !important; }
+  .border-gray-200  { border-color: var(--line)                !important; }
+  .border-gray-300  { border-color: rgba(255,255,255,.16)      !important; }
+  .border-green-200 { border-color: rgba(42,160,72,.25)        !important; }
+  .border-green-300 { border-color: rgba(42,160,72,.35)        !important; }
+  .border-orange-100 { border-color: rgba(192,83,39,.20)       !important; }
+  .border-orange-200 { border-color: rgba(192,83,39,.30)       !important; }
+  .border-amber-200  { border-color: rgba(190,140,30,.30)      !important; }
+  .border-red-200    { border-color: rgba(200,50,50,.30)       !important; }
+  .border-blue-200   { border-color: rgba(50,100,220,.30)      !important; }
+  .border-gray-50    { border-color: var(--line-soft)          !important; }
+
+  /* Hover backgrounds (common patterns used in the app) */
+  .hover\:bg-gray-50:hover    { background-color: rgba(255,255,255,.04) !important; }
+  .hover\:bg-orange-50:hover  { background-color: rgba(192,83,39,.08)  !important; }
+
+  /* Shadows */
+  .shadow-sm  { box-shadow: 0 1px 4px rgba(0,0,0,.50) !important; }
+  .shadow     { box-shadow: var(--shadow)              !important; }
+  .shadow-md  { box-shadow: var(--shadow-md)           !important; }
+
+  /* Generic form inputs — cream on dark (matches T&C Generator) */
+  input[type="text"]:not(.pma-input),
+  input[type="number"],
+  input[type="email"],
+  input[type="search"] {
+    background-color: #f8f3e9 !important;
+    color: #2c2a26 !important;
+    border-color: rgba(192,83,39,.22) !important;
+  }
+  input[type="text"]:not(.pma-input)::placeholder,
+  input[type="number"]::placeholder,
+  input[type="email"]::placeholder {
+    color: #a09580 !important;
+  }
+  textarea:not(.pma-input) {
+    background-color: #f8f3e9 !important;
+    color: #2c2a26 !important;
+    border-color: rgba(192,83,39,.22) !important;
+  }
+  select:not(.pma-select) {
+    background-color: #f8f3e9 !important;
+    color: #2c2a26 !important;
+    border-color: rgba(192,83,39,.22) !important;
+  }
+
+  /* Generic bordered containers */
+  .divide-gray-100 > * + *    { border-color: var(--line-soft) !important; }
+  .divide-gray-200 > * + *    { border-color: var(--line)      !important; }
+}
+
+/* ─── Print / PDF ─── */
+.print-only { display: none; }
+
+@media print {
+  @page { size: A4 landscape; margin: 12mm; }
+  @page portraitPage { size: A4 portrait; margin: 14mm; }
+  .quote-print { page: portraitPage; }
+
+  nav, .no-print { display: none !important; }
+  body::after    { display: none !important; }
+  .print-only    { display: block !important; }
+
+  body  { background: #fff !important; color: #000 !important; }
+  main  { max-width: none !important; padding: 0 !important; }
+
+  /* Reset dark overrides so print output is always light */
+  .bg-white, .bg-gray-50, .bg-gray-100 { background-color: revert !important; }
+  .text-gray-900, .text-gray-800, .text-gray-700,
+  .text-gray-600, .text-gray-500, .text-gray-400 { color: revert !important; }
+  .border, .border-gray-100, .border-gray-200, .border-gray-300 { border-color: revert !important; }
+
+  *, *::before, *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* CS table */
+  .cs-print { font-size: 10px; }
+  .cs-print .overflow-x-auto { overflow: visible !important; }
+  .cs-print table.cs-table {
+    min-width: 0 !important; width: 100% !important;
+    table-layout: fixed !important; font-size: 9px;
+  }
+  .cs-print thead { display: table-header-group; }
+  .cs-print tr, .cs-print td, .cs-print th { page-break-inside: avoid; }
+  .cs-print table.cs-table th,
+  .cs-print table.cs-table td { padding: 2px 3px !important; }
+  .cs-print table.cs-table thead th div { font-size: 8px !important; line-height: 1.15 !important; }
+  .cs-print .cs-remark { font-size: 7.5px !important; line-height: 1.1 !important; }
+
+  /* Quotation */
+  .quote-print { max-width: 100% !important; }
+  .quote-print .rate-card { page-break-inside: avoid; }
+
+  /* Signature block */
+  .signature-block { margin-top: 32px; text-align: right; page-break-inside: avoid; }
+  .signature-block .sig-line { display: inline-block; width: 280px; text-align: center; }
+  .signature-block .sig-name { font-size: 12px; font-weight: 600; }
+  .signature-block .sig-rule { border-top: 1px solid #444; margin-top: 48px; padding-top: 5px; font-size: 11px; }
+  .signature-block .sig-meta { font-size: 11px; margin-top: 6px; text-align: left; }
+
+  /* Draft print */
+  .draft-print-area { background: #fff !important; }
+  .draft-watermark  { display: block !important; }
+}
